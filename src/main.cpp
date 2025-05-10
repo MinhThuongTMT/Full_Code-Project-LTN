@@ -42,14 +42,18 @@ void setup()
 
   // **Cấu hình các chân đầu ra**
   pinMode(LED_PIN, OUTPUT);
-  pinMode(LED_1, OUTPUT);
-  pinMode(LED_2, OUTPUT);
+  pinMode(LED_1, OUTPUT); // LED_1 cho máy bơm
+  pinMode(LED_2, OUTPUT); // LED_2 cho máy bơm
+  pinMode(LED_3, OUTPUT); // LED_3 cho quạt
+  pinMode(LED_4, OUTPUT); // LED_4 cho quạt
   pinMode(RELAY_PIN, OUTPUT);
   pinMode(RELAY_FAN, OUTPUT);
   digitalWrite(LED_PIN, LOW);
   digitalWrite(LED_1, LOW);
   digitalWrite(LED_2, LOW);
-  digitalWrite(RELAY_PIN, HIGH); // Relay thường đóng khi khởi động
+  digitalWrite(LED_3, LOW); // Tắt LED_3 ban đầu
+  digitalWrite(LED_4, LOW); // Tắt LED_4 ban đầu
+  digitalWrite(RELAY_PIN, HIGH);
   digitalWrite(RELAY_FAN, HIGH);
 
   // **Cấu hình cảm biến**
@@ -89,6 +93,8 @@ void loop()
       digitalWrite(LED_PIN, LOW);
       digitalWrite(LED_1, LOW);
       digitalWrite(LED_2, LOW);
+      digitalWrite(LED_3, LOW);
+      digitalWrite(LED_4, LOW);
       digitalWrite(RELAY_PIN, HIGH);
       digitalWrite(RELAY_FAN, HIGH);
       displayMode();
@@ -108,6 +114,8 @@ void loop()
       digitalWrite(LED_PIN, LOW);
       digitalWrite(LED_1, LOW);
       digitalWrite(LED_2, LOW);
+      digitalWrite(LED_3, LOW);
+      digitalWrite(LED_4, LOW);
       digitalWrite(RELAY_PIN, HIGH);
       digitalWrite(RELAY_FAN, HIGH);
       displayMode();
@@ -127,6 +135,8 @@ void loop()
       digitalWrite(LED_PIN, LOW);
       digitalWrite(LED_1, LOW);
       digitalWrite(LED_2, LOW);
+      digitalWrite(LED_3, LOW);
+      digitalWrite(LED_4, LOW);
       digitalWrite(RELAY_PIN, HIGH);
       digitalWrite(RELAY_FAN, HIGH);
       displayMode();
@@ -153,7 +163,7 @@ void loop()
 
   // **Xử lý nút điều khiển relay**
   handleButton(BUTTON_RELAY_ON, lastRelayOnState, RELAY_PIN, LED_1, LED_2, "may bom");
-  handleButton(BUTTON_RELAY_OFF, lastRelayOffState, RELAY_FAN, LED_1, LED_2, "quat");
+  handleButton(BUTTON_RELAY_OFF, lastRelayOffState, RELAY_FAN, LED_3, LED_4, "quat");
 
   // **Xử lý nhập liệu từ keypad**
   if (millis() - lastKeypadDebounceTime > debounceDelay)
@@ -173,30 +183,35 @@ void loop()
         }
         else if (key == 'B')
         {
-          digitalWrite(RELAY_FAN, !digitalRead(RELAY_FAN));
-          displayDeviceStatus(digitalRead(RELAY_FAN) == LOW ? "Bat quat" : "Tat quat");
-          Serial.println(digitalRead(RELAY_FAN) == LOW ? "Fan ON" : "Fan OFF");
+          bool currentFanState = digitalRead(RELAY_FAN) == LOW; // LOW là ON
+          controlFan(!currentFanState);                         // Đổi trạng thái quạt và LED
+          displayDeviceStatus(!currentFanState ? "Bat quat" : "Tat quat");
+          Serial.println(!currentFanState ? "Fan ON" : "Fan OFF");
           lastKeypadDebounceTime = millis();
         }
         else if (key == 'C')
         {
-          digitalWrite(RELAY_PIN, !digitalRead(RELAY_PIN));
-          displayDeviceStatus(digitalRead(RELAY_PIN) == LOW ? "Bat may bom" : "Tat may bom");
-          Serial.println(digitalRead(RELAY_PIN) == LOW ? "Pump ON" : "Pump OFF");
+          bool currentPumpState = digitalRead(RELAY_PIN) == LOW; // LOW là ON
+          controlPump(!currentPumpState);                        // Đổi trạng thái máy bơm và LED
+          displayDeviceStatus(!currentPumpState ? "Bat may bom" : "Tat may bom");
+          Serial.println(!currentPumpState ? "Pump ON" : "Pump OFF");
           lastKeypadDebounceTime = millis();
         }
       }
 
       // **Phím '*' để hiển thị menu**
-      if ((currentMode == MANUAL || currentMode == AUTO ) && key == '*')
+      if ((currentMode == MANUAL || currentMode == AUTO) && key == '*')
       {
         lcd.clear(); // Xóa màn hình một lần duy nhất
         currentMode = MANUAL;
         currentScreen = MENU;
         // Tắt các thiết bị để đảm bảo trạng thái ban đầu
         digitalWrite(LED_PIN, LOW);
-        digitalWrite(LED_1, LOW);  // Tắt đèn xanh nếu điều khiển bởi LED_1
-        digitalWrite(LED_2, LOW);  // Tắt đèn nếu điều khiển bởi LED_2
+        digitalWrite(LED_PIN, LOW);
+        digitalWrite(LED_1, LOW);
+        digitalWrite(LED_2, LOW);
+        digitalWrite(LED_3, LOW);
+        digitalWrite(LED_4, LOW);
         digitalWrite(RELAY_PIN, HIGH);
         digitalWrite(RELAY_FAN, HIGH);
         displayMenu();
@@ -304,8 +319,11 @@ void loop()
             currentMode = MANUAL;
             currentScreen = HOME;
             digitalWrite(LED_PIN, LOW);
+            digitalWrite(LED_PIN, LOW);
             digitalWrite(LED_1, LOW);
             digitalWrite(LED_2, LOW);
+            digitalWrite(LED_3, LOW);
+            digitalWrite(LED_4, LOW);
             digitalWrite(RELAY_PIN, HIGH);
             digitalWrite(RELAY_FAN, HIGH);
             displayMode();
@@ -316,8 +334,11 @@ void loop()
             displayMessage("Mat khau dung");
             currentMode = AUTO;
             digitalWrite(LED_PIN, LOW);
+            digitalWrite(LED_PIN, LOW);
             digitalWrite(LED_1, LOW);
             digitalWrite(LED_2, LOW);
+            digitalWrite(LED_3, LOW);
+            digitalWrite(LED_4, LOW);
             digitalWrite(RELAY_PIN, HIGH);
             digitalWrite(RELAY_FAN, HIGH);
             displayMode();
@@ -331,6 +352,8 @@ void loop()
             digitalWrite(LED_PIN, LOW);
             digitalWrite(LED_1, LOW);
             digitalWrite(LED_2, LOW);
+            digitalWrite(LED_3, LOW);
+            digitalWrite(LED_4, LOW);
             digitalWrite(RELAY_PIN, HIGH);
             digitalWrite(RELAY_FAN, HIGH);
             displaySetTimeMenu();
