@@ -5,7 +5,7 @@
 int pumpOnDistance = 20;  // Giá trị mặc định: 20 cm
 int pumpOffDistance = 10; // Giá trị mặc định: 10 cm
 
-float measureDistance() {
+float measureDistance() { // Hàm đo khoảng cách
   digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
   digitalWrite(TRIG_PIN, HIGH);
@@ -17,5 +17,9 @@ float measureDistance() {
 }
 
 int readLightSensor() {
-  return digitalRead(LIGHT_SENSOR);
+  return digitalRead(LIGHT_SENSOR); // Đọc giá trị từ cảm biến ánh sáng
+}
+
+int readPIRSensor() {
+  return digitalRead(PIR_PIN); // Đọc giá trị từ cảm biến PIR
 }

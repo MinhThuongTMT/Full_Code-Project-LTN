@@ -16,3 +16,6 @@ void controlFan(bool state) {
   digitalWrite(LED_3, state ? HIGH : LOW);     // LED 3 (xanh) sáng khi bật
   digitalWrite(LED_4, state ? LOW : HIGH);     // LED 4 (đỏ) sáng khi tắt
 }
+void controlBuzzer(bool state) {
+  digitalWrite(BUZZER_PIN, state ? HIGH : LOW); // Bật/tắt buzzer
+}

@@ -23,6 +23,12 @@ String waterLevelInput = ""; // Chuỗi nhập mực nước từ keypad
 int waterLevelPhase = 0;     // Giai đoạn: 0 = mức bật, 1 = mức tắt
 int tempOnDistance = 0;      // Biến tạm lưu khoảng cách bật
 
+unsigned long buzzerStartTime = 0; // Thời gian bắt đầu kêu còi
+bool buzzerActive = false;         // Trạng thái còi (đang kêu hay không)
+unsigned long buzzerDuration = 0;  // Thời gian kêu còi (ms)
+bool pumpActionPending = false;    // Có hành động máy bơm đang chờ hay không
+bool pumpTargetState = false;      // Trạng thái mục tiêu của máy bơm (true = bật, false = tắt)
+
 void setup()
 {
   // **Khởi tạo giao tiếp và màn hình**
@@ -39,6 +45,7 @@ void setup()
   pinMode(BUTTON_LED, INPUT_PULLUP);
   pinMode(BUTTON_RELAY_ON, INPUT_PULLUP);
   pinMode(BUTTON_RELAY_OFF, INPUT_PULLUP);
+  pinMode(BUZZER_PIN, OUTPUT);
 
   // **Cấu hình các chân đầu ra**
   pinMode(LED_PIN, OUTPUT);
@@ -48,6 +55,7 @@ void setup()
   pinMode(LED_4, OUTPUT); // LED_4 cho quạt
   pinMode(RELAY_PIN, OUTPUT);
   pinMode(RELAY_FAN, OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT); // Cấu hình chân buzzer
   digitalWrite(LED_PIN, LOW);
   digitalWrite(LED_1, LOW);
   digitalWrite(LED_2, LOW);
@@ -55,11 +63,13 @@ void setup()
   digitalWrite(LED_4, LOW); // Tắt LED_4 ban đầu
   digitalWrite(RELAY_PIN, HIGH);
   digitalWrite(RELAY_FAN, HIGH);
+  digitalWrite(BUZZER_PIN, LOW); // Tắt buzzer ban đầu
 
   // **Cấu hình cảm biến**
-  pinMode(LIGHT_SENSOR, INPUT);
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
+  pinMode(LIGHT_SENSOR, INPUT); // Cấu hình chân cảm biến ánh sáng
+  pinMode(TRIG_PIN, OUTPUT); // Cấu hình chân cảm biến siêu âm
+  pinMode(ECHO_PIN, INPUT); // Cấu hình chân cảm biến siêu âm
+  pinMode(PIR_PIN, INPUT); // Cấu hình chân cảm biến PIR
 
   // **Cấu hình bàn phím keypad**
   for (int i = 0; i < KEYPAD_NUMBER_OF_ROWS; i++)
@@ -611,32 +621,58 @@ void loop()
   }
 
   // **Logic chế độ tự động**
-  if (currentMode == AUTO && !isSystemLocked)
-  {
-    // Luôn bật quạt trong chế độ Auto
+if (currentMode == AUTO && !isSystemLocked)
+{
     controlFan(true);
 
-    // Điều khiển đèn dựa trên cảm biến ánh sáng
+    int pirValue = readPIRSensor();
     int lightValue = readLightSensor();
-    controlLED(lightValue == HIGH);
 
-    // Điều khiển máy bơm dựa trên cảm biến khoảng cách
-    if (millis() - lastDistanceMeasureTime > distanceMeasureInterval)
-    {
-      float distance = measureDistance();
-      if (distance > pumpOnDistance)
-      {
-        controlPump(true);
-      }
-      else if (distance < pumpOffDistance)
-      {
-        controlPump(false);
-      }
-      lastDistanceMeasureTime = millis();
+    if (pirValue == HIGH || lightValue == HIGH) {
+        controlLED(true);
+    } else {
+        controlLED(false);
     }
-    // Cập nhật và hiển thị trạng thái thiết bị
-    displayAutoStatus(); // Gọi trực tiếp để đảm bảo cập nhật liên tục
-  }
+
+    // Chỉ kiểm tra khoảng cách khi không có còi đang kêu và không có hành động máy bơm đang chờ
+    if (millis() - lastDistanceMeasureTime > distanceMeasureInterval && !buzzerActive && !pumpActionPending)
+    {
+        float distance = measureDistance();
+        bool currentPumpState = digitalRead(RELAY_PIN) == LOW;
+
+        // Kiểm tra điều kiện để bật máy bơm
+        if (distance > pumpOnDistance && !currentPumpState) {
+            controlBuzzer(true);        // Bật còi
+            buzzerStartTime = millis(); // Ghi lại thời gian bắt đầu
+            buzzerActive = true;
+            buzzerDuration = 3000;      // Còi kêu 3 giây trước khi bật máy bơm
+            pumpActionPending = true;
+            pumpTargetState = true;     // Chuẩn bị bật máy bơm
+        }
+        // Kiểm tra điều kiện để tắt máy bơm
+        else if (distance < pumpOffDistance && currentPumpState) {
+            controlPump(false);         // Tắt máy bơm trước
+            controlBuzzer(true);        // Bật còi sau khi tắt
+            buzzerStartTime = millis(); // Ghi lại thời gian bắt đầu
+            buzzerActive = true;
+            buzzerDuration = 1000;      // Còi kêu 1 giây sau khi tắt máy bơm
+            pumpActionPending = false;  // Không cần hành động thêm cho máy bơm
+        }
+        lastDistanceMeasureTime = millis();
+    }
+
+    // Kiểm tra thời gian và tắt còi sau khi hết thời gian kêu
+    if (buzzerActive && (millis() - buzzerStartTime >= buzzerDuration)) {
+        controlBuzzer(false); // Tắt còi
+        buzzerActive = false;
+        if (pumpActionPending) {
+            controlPump(pumpTargetState); // Thực hiện bật máy bơm nếu đang chờ
+            pumpActionPending = false;
+        }
+    }
+
+    displayAutoStatus();
+}
 
   // **Điều khiển thiết bị theo thời gian**
   if (currentMode == SETTING_TIME && !isSystemLocked && currentScreen == HOME)

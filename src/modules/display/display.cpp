@@ -260,6 +260,6 @@ void displayAutoStatus() {
   lcd.print("Den: ");
   lcd.print(digitalRead(LED_PIN) ? "ON " : "OFF"); // Trạng thái đèn
   lcd.setCursor(0, 3);
-  lcd.print("May bom: ");
+  lcd.print("May bom nuoc: ");
   lcd.print(digitalRead(RELAY_PIN) == LOW ? "ON " : "OFF"); // Trạng thái máy bơm (LOW = ON)
 }
