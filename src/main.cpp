@@ -207,7 +207,6 @@ void loop()
         currentScreen = MENU;
         // Tắt các thiết bị để đảm bảo trạng thái ban đầu
         digitalWrite(LED_PIN, LOW);
-        digitalWrite(LED_PIN, LOW);
         digitalWrite(LED_1, LOW);
         digitalWrite(LED_2, LOW);
         digitalWrite(LED_3, LOW);
@@ -319,7 +318,6 @@ void loop()
             currentMode = MANUAL;
             currentScreen = HOME;
             digitalWrite(LED_PIN, LOW);
-            digitalWrite(LED_PIN, LOW);
             digitalWrite(LED_1, LOW);
             digitalWrite(LED_2, LOW);
             digitalWrite(LED_3, LOW);
@@ -333,7 +331,6 @@ void loop()
           {
             displayMessage("Mat khau dung");
             currentMode = AUTO;
-            digitalWrite(LED_PIN, LOW);
             digitalWrite(LED_PIN, LOW);
             digitalWrite(LED_1, LOW);
             digitalWrite(LED_2, LOW);
