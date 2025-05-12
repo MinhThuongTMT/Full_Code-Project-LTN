@@ -121,7 +121,7 @@ Vi điều khiển **STM32F429ZI** là trung tâm điều khiển:
 - **Ngôn ngữ:** C/C++  
 - **Thư viện:**  
   - `LiquidCrystal_I2C`  
-  - STM32 HAL/LL
+  - `STM32 MUCLEO-F429ZI`
 
 ### Kiến trúc Phần mềm
 
@@ -163,6 +163,34 @@ Vi điều khiển **STM32F429ZI** là trung tâm điều khiển:
 │   ├── image23.png
 │   ├── image24.png
 
-```plaintext
+```
 
-## 📊 Kiến trúc Hệ thống
+# 🚀 Hướng dẫn Cài đặt và Sử dụng
+
+## ⚙️ Yêu cầu phần mềm
+
+- Visual Studio Code  
+- PlatformIO IDE (cài trực tiếp trên VSCode)  
+- Driver STLink (cho board STM32 Nucleo)  
+- Python 3 (được PlatformIO sử dụng nội bộ)
+
+---
+
+## 📦 Cài đặt môi trường
+
+### 1. Cài đặt Visual Studio Code  
+Tải và cài đặt từ: https://code.visualstudio.com/
+
+### 2. Cài đặt PlatformIO Extension  
+Mở VSCode → Mở mục **Extensions** (Ctrl+Shift+X)  
+Tìm **"PlatformIO IDE"** → Nhấn **Install**
+
+### 3. Clone dự án về máy
+
+```bash
+git clone https://github.com/tennguoidung/ten-repo.git
+cd ten-repo
+```
+
+
+
