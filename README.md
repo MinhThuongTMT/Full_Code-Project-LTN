@@ -239,19 +239,30 @@ Nhấn PlatformIO: Monitor (🔍) để xem log hoặc phản hồi từ vi đi�
 
 📋 Ghi chú sử dụng
 
-Màn hình LCD 20x4 hiển thị menu, thông báo và lỗi hệ thống.
+- Màn hình LCD 20x4 hiển thị menu, thông báo và lỗi hệ thống.
 
-Hệ thống có thể sử dụng nút nhấn để điều khiển nhanh các thiết bị.
+- Hệ thống có thể sử dụng nút nhấn để điều khiển nhanh các thiết bị.
 
-Còi cảnh báo sẽ phát tiếng nếu có lỗi hoặc nhập sai mật khẩu.
+- Còi cảnh báo sẽ phát tiếng nếu có lỗi hoặc nhập sai mật khẩu.
 
 🧪 Kiểm tra và Thử nghiệm
 
-Đặt tay trước cảm biến PIR → đèn sẽ bật nếu ánh sáng yếu.
+- Đặt tay trước cảm biến PIR → đèn sẽ bật nếu ánh sáng yếu.
 
-Đổ nước vào bể thử HC-SR04 → máy bơm sẽ bật/tắt tương ứng.
+- Đổ nước vào bể thử HC-SR04 → máy bơm sẽ bật/tắt tương ứng.
 
-Nhấn các nút hoặc nhập lệnh để kiểm tra các chức năng như thời gian, relay.
+- Nhấn các nút hoặc nhập lệnh để kiểm tra các chức năng như thời gian, relay.
 
+## 💡 Nếu bạn thích dự án này, hãy ⭐️ trên GitHub nhé!
+
+---
+
+## 📩 Liên hệ:  
+[tranminhthuong08082003@gmail.com](mailto:tranminhthuong08082003@gmail.com)
+
+---
+
+## 📌 Tác giả:  
+🚀 **Tran Minh Thuong** 🚀
 
 
