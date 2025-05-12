@@ -198,27 +198,27 @@ Vào File → Open Folder... và chọn thư mục dự án vừa clone.
 🔧 Cấu hình PlatformIO
 File platformio.ini đã được cấu hình sẵn:
 
-[env:nucleo_f429zi]
+- [env:nucleo_f429zi]
 
-platform = ststm32
+- platform = ststm32
 
-board = nucleo_f429zi
+- board = nucleo_f429zi
 
-framework = arduino
+- framework = arduino
 
-upload_protocol = stlink
+- upload_protocol = stlink
 
-monitor_speed = 115200
+- monitor_speed = 115200
 
 ⚠️ Nếu bạn sử dụng bo mạch khác, hãy chỉnh lại board = cho phù hợp với phần cứng của bạn.
 
 🚀 Biên dịch và Upload
 
-Nhấn PlatformIO: Build (✔️) để biên dịch mã nguồn.
+- Nhấn PlatformIO: Build (✔️) để biên dịch mã nguồn.
 
-Nhấn PlatformIO: Upload (➡️) để nạp chương trình vào board.
+- Nhấn PlatformIO: Upload (➡️) để nạp chương trình vào board.
 
-Đảm bảo board đã được kết nối với máy tính qua cáp USB.
+- Đảm bảo board đã được kết nối với máy tính qua cáp USB.
 
 🖥️ Theo dõi Serial Monitor
 
