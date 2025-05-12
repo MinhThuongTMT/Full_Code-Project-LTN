@@ -162,3 +162,7 @@ Vi điều khiển **STM32F429ZI** là trung tâm điều khiển:
 ├── media/
 │   ├── image23.png
 │   ├── image24.png
+
+```plaintext
+
+## 📊 Kiến trúc Hệ thống
