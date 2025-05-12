@@ -84,17 +84,17 @@ Hệ thống sử dụng **vi điều khiển NUCLEO-STM32F429ZI**, các loại 
 
 ## 🔌 Kết nối Chân
 
-- **HC-SR04:** TRIG (PA6), ECHO (PA7)  
-- **PIR AM312:** OUT (PA3)  
-- **LDR NVZ1:** DO (PG9)  
-- **Bàn phím 4x4:**  
-  - Hàng: PB3, PB5, PC7, PA15  
-  - Cột: PB12, PB13, PB15, PC6  
-- **Nút nhấn:** PE9, PE11, PF14, PE13, PF15  
-- **Relay:** PF2 (máy bơm), PE6 (quạt)  
-- **LED:** PG14, PB6, PB2, PD15, PF12  
-- **Còi:** PE10  
-- **LCD:** GPIO hoặc I2C qua PCF8574 (SDA/SCL)
+| Thiết bị            | Kết nối Chân                                        |
+|---------------------|-----------------------------------------------------|
+| **HC-SR04**         | TRIG (PA6), ECHO (PA7)                             |
+| **PIR AM312**       | OUT (PA3)                                          |
+| **LDR NVZ1**        | DO (PG9)                                           |
+| **Bàn phím 4x4**    | Hàng: PB3, PB5, PC7, PA15 <br> Cột: PB12, PB13, PB15, PC6 |
+| **Nút nhấn**        | PE9, PE11, PF14, PE13, PF15                        |
+| **Relay**           | PF2 (máy bơm), PE6 (quạt)                          |
+| **LED**             | PG14, PB6, PB2, PD15, PF12                         |
+| **Còi**             | PE10                                               |
+| **LCD**             | GPIO hoặc I2C qua PCF8574 (SDA/SCL)                |
 
 ---
 
