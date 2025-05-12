@@ -199,14 +199,21 @@ Vào File → Open Folder... và chọn thư mục dự án vừa clone.
 File platformio.ini đã được cấu hình sẵn:
 
 [env:nucleo_f429zi]
+
 platform = ststm32
+
 board = nucleo_f429zi
+
 framework = arduino
+
 upload_protocol = stlink
+
 monitor_speed = 115200
+
 ⚠️ Nếu bạn sử dụng bo mạch khác, hãy chỉnh lại board = cho phù hợp với phần cứng của bạn.
 
 🚀 Biên dịch và Upload
+
 Nhấn PlatformIO: Build (✔️) để biên dịch mã nguồn.
 
 Nhấn PlatformIO: Upload (➡️) để nạp chương trình vào board.
@@ -214,19 +221,27 @@ Nhấn PlatformIO: Upload (➡️) để nạp chương trình vào board.
 Đảm bảo board đã được kết nối với máy tính qua cáp USB.
 
 🖥️ Theo dõi Serial Monitor
+
 Nhấn PlatformIO: Monitor (🔍) để xem log hoặc phản hồi từ vi điều khiển.
 
 🔑 Mật khẩu sử dụng
+
 Mật khẩu	Chức năng
+
 1111	Kích hoạt chế độ Thủ công
+
 2222	Kích hoạt chế độ Tự động
+
 3333	Cài đặt Thời gian & Lịch
+
 8888	Mở khóa hệ thống
+
 9999	Khóa hệ thống tạm thời
 
 👉 Nhập mật khẩu bằng bàn phím 4x4 và nhấn # để xác nhận.
 
 📋 Ghi chú sử dụng
+
 Màn hình LCD 20x4 hiển thị menu, thông báo và lỗi hệ thống.
 
 Hệ thống có thể sử dụng nút nhấn để điều khiển nhanh các thiết bị.
@@ -234,6 +249,7 @@ Hệ thống có thể sử dụng nút nhấn để điều khiển nhanh các 
 Còi cảnh báo sẽ phát tiếng nếu có lỗi hoặc nhập sai mật khẩu.
 
 🧪 Kiểm tra và Thử nghiệm
+
 Đặt tay trước cảm biến PIR → đèn sẽ bật nếu ánh sáng yếu.
 
 Đổ nước vào bể thử HC-SR04 → máy bơm sẽ bật/tắt tương ứng.
