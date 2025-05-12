@@ -253,9 +253,9 @@ Nhấn PlatformIO: Monitor (🔍) để xem log hoặc phản hồi từ vi đi�
 
 - Nhấn các nút hoặc nhập lệnh để kiểm tra các chức năng như thời gian, relay.
 
-## 💡 Nếu bạn thích dự án này, hãy ⭐️ trên GitHub nhé!
-
 ---
+
+## 💡 Nếu bạn thích dự án này, hãy ⭐️ trên GitHub nhé! 
 
 ## 📩 Liên hệ:  
 [tranminhthuong08082003@gmail.com](mailto:tranminhthuong08082003@gmail.com)
