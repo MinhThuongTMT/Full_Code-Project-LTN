@@ -224,19 +224,16 @@ File platformio.ini đã được cấu hình sẵn:
 
 Nhấn PlatformIO: Monitor (🔍) để xem log hoặc phản hồi từ vi điều khiển.
 
-🔑 Mật khẩu sử dụng
+## 🔑 Mật khẩu sử dụng
 
-Mật khẩu	Chức năng
+| Mật khẩu | Chức năng                        |
+|----------|----------------------------------|
+| 1111     | Kích hoạt chế độ **Thủ công**   |
+| 2222     | Kích hoạt chế độ **Tự động**    |
+| 3333     | **Cài đặt Thời gian & Lịch**    |
+| 8888     | **Mở khóa hệ thống**            |
+| 9999     | **Khóa hệ thống tạm thời**      |
 
-1111	Kích hoạt chế độ Thủ công
-
-2222	Kích hoạt chế độ Tự động
-
-3333	Cài đặt Thời gian & Lịch
-
-8888	Mở khóa hệ thống
-
-9999	Khóa hệ thống tạm thời
 
 👉 Nhập mật khẩu bằng bàn phím 4x4 và nhấn # để xác nhận.
 
