@@ -1,5 +1,8 @@
 # 🏠 Hệ thống Nhà Thông Minh Điều khiển Máy Bơm Nước và Thiết bị Bếp
 
+> **Hình ảnh sản phẩm**
+![image](https://github.com/user-attachments/assets/a500eb5b-8b52-44d3-960b-1813e4eab192)
+
 ---
 
 ## 🎉 Giới thiệu
